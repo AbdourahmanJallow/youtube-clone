@@ -8,8 +8,10 @@ function Videos({ videos }) {
         <Stack direction='row' justifyContent='start' flexWrap='wrap' gap={2}>
             {videos.map((item, index) => (
                 <Box key={index}>
-                    {item.id.videoId && <VideoCard video={item} />}
-                    {item.id.channelId && <ChannelCard channelDetail={item} />}
+                    {item?.id?.videoId && <VideoCard video={item} />}
+                    {item?.id?.channelId && (
+                        <ChannelCard channelDetail={item} />
+                    )}
                 </Box>
             ))}
         </Stack>

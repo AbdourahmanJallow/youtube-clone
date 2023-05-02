@@ -15,11 +15,11 @@ const VideoCard = ({
         snippet
     }
 }) => {
-    console.log(videoId, snippet);
+    // console.log(videoId, snippet);
     return (
         <Card
             sx={{
-                width: { md: "320px", xs: "100%" },
+                width: { xs: "100%", sm: "358px", md: "320px" },
                 boxshadow: "none",
                 borderRadius: "0"
             }}
@@ -29,7 +29,7 @@ const VideoCard = ({
                     image={snippet?.thumbnails?.high?.url}
                     alt={snippet?.title}
                     sx={{
-                        width: 358,
+                        width: { xs: "100%", sm: "358px" },
                         height: 180
                     }}
                 />
@@ -67,7 +67,7 @@ const VideoCard = ({
                             demoChannelTitle.slice(0, 60)}
                         <CheckCircle
                             sx={{
-                                fontSize: 12,
+                                fontSize: "12px",
                                 color: "gray",
                                 ml: "5px"
                             }}
