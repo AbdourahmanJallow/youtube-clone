@@ -4,16 +4,20 @@ import { Typography, Box, Stack } from "@mui/material";
 import ReactPlayer from "react-player";
 import { CheckCircle } from "@mui/icons-material";
 import { fetchFromApi } from "../assets/fetchFromApi";
-// import { Video } from "./";
+import { Videos } from "./";
 
 function VideoDetail() {
     const { id } = useParams();
     const [videoDetail, setVideoDetail] = useState([]);
+    const [videos, setVideos] = useState([]);
 
     useEffect(() => {
         fetchFromApi(`videos?part=snippet,statistics&id=${id}`).then((data) =>
             setVideoDetail(data.items[0])
         );
+        fetchFromApi(
+            `search?part=snippet&relatedToVideoId=${id}&type=video`
+        ).then((data) => setVideos(data.items));
     }, [id]);
 
     if (!videoDetail?.snippet) return "Loading...";
@@ -63,6 +67,10 @@ function VideoDetail() {
                                         md: "h6"
                                     }}
                                     color='#fff'
+                                    sx={{
+                                        justifyContent: "center",
+                                        alignItems: "center"
+                                    }}
                                 >
                                     {channelTitle}
                                     <CheckCircle
@@ -95,6 +103,14 @@ function VideoDetail() {
                             </Stack>
                         </Stack>
                     </Box>
+                </Box>
+                <Box
+                    px={2}
+                    py={{ md: 1, xs: 5 }}
+                    justifyContent='center'
+                    alignItems='center'
+                >
+                    <Videos videos={videos} direction='column' />
                 </Box>
             </Stack>
         </Box>
